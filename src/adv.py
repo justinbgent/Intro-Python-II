@@ -4,7 +4,7 @@ from room import Room
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mouth beckons."),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
@@ -38,6 +38,8 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+from player import Player
+player = Player(room['outside'])
 
 # Write a loop that:
 #
@@ -49,3 +51,30 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+play = True
+
+def getInput():
+    continueGame = input("What would you like to do? ('n' 'e' 's' or 'w' to go north, east, south, or west. 'q' to quit)\n:")
+    if continueGame == "q":
+        global play 
+        play = False
+    elif continueGame == "n":
+        if player.currentRoom.canPlayerMoveThere("n") == True:
+            player.currentRoom = player.currentRoom.n_to
+    elif continueGame == "e":
+        if player.currentRoom.canPlayerMoveThere("e") == True:
+            player.currentRoom = player.currentRoom.e_to
+    elif continueGame == "s":
+        if player.currentRoom.canPlayerMoveThere("s") == True:
+            player.currentRoom = player.currentRoom.s_to
+    elif continueGame == "w":
+        if player.currentRoom.canPlayerMoveThere("w") == True:
+            player.currentRoom = player.currentRoom.w_to
+    else:
+        print(f"'{continueGame}' is not valid input")
+        getInput()
+
+while play:
+    print("\n" + player.currentRoom.__str__())
+    getInput()
+    
