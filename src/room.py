@@ -8,9 +8,11 @@ class Room:
     s_to = 0
     w_to = 0
 
-    def __init__(self, name, description):
+    from item import Item
+    def __init__(self, name, description, items):
         self.name = name
         self.description = description
+        self.items = items
 
     def moveReport(self, travelAttempt, stringToCheckAgainst, valueCheck):
         if travelAttempt == stringToCheckAgainst:
