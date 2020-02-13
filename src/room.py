@@ -12,31 +12,20 @@ class Room:
         self.name = name
         self.description = description
 
+    def moveReport(self, travelAttempt, stringToCheckAgainst, valueCheck):
+        if travelAttempt == stringToCheckAgainst:
+            if(valueCheck == 0):
+                print("\nERROR: Can't move that direction here.")
+                return False
+            else:
+                return True
+        
+
     def canPlayerMoveThere(self, direction):
-        if direction == "n":
-            if(self.n_to == 0):
-                print("ERROR: Can't move that direction here.")
-                return False
-            else:
-                return True
-        if direction == "e":
-            if(self.e_to == 0):
-                print("ERROR: Can't move that direction here.")
-                return False
-            else:
-                return True
-        if direction == "s":
-            if(self.s_to == 0):
-                print("ERROR: Can't move that direction here.")
-                return False
-            else:
-                return True
-        if direction == "w":
-            if(self.w_to == 0):
-                print("ERROR: Can't move that direction here.")
-                return False
-            else:
-                return True
+        return (self.moveReport(direction, "n", self.n_to) or 
+        self.moveReport(direction, "e", self.e_to) or
+        self.moveReport(direction, "s", self.s_to) or
+        self.moveReport(direction, "w", self.w_to))
     
     def __str__(self):
         return (self.description + "\nLocation: \"" + self.name + "\"")

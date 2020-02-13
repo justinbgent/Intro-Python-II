@@ -39,7 +39,7 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 from player import Player
-player = Player(room['outside'])
+player = Player("You", room['outside'])
 
 # Write a loop that:
 #
@@ -71,7 +71,7 @@ def getInput():
         if player.currentRoom.canPlayerMoveThere("w") == True:
             player.currentRoom = player.currentRoom.w_to
     else:
-        print(f"'{continueGame}' is not valid input")
+        print(f"\n'{continueGame}' is not valid input")
         getInput()
 
 while play:
